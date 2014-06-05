@@ -528,7 +528,7 @@ void MJPEGServer::sendStream(int fd, const char *parameter)
       ROS_DEBUG("waiting for new frame");
       image_buffer->condition_.wait(lock);
       ROS_DEBUG("got new frame, send it to clients");
-      sendFrame(fd, image_buffer, parameter_map, frame, buffer)
+      sendFrame(fd, image_buffer, parameter_map, frame, buffer);
       if (!sendFrame(fd, image_buffer, parameter_map, frame, buffer))
       	break;
   	}
