@@ -516,6 +516,7 @@ void MJPEGServer::sendStream(int fd, const char *parameter)
   	if (image_buffer->msg.encoding.length()>0) {
   		ROS_INFO("send first frame without waiting for a topic update: encoding=%s", image_buffer->msg.encoding.c_str());
   		sendFrame(fd, image_buffer, parameter_map, frame, buffer);
+  		sendFrame(fd, image_buffer, parameter_map, frame, buffer);
   	}
   }
 
@@ -527,6 +528,7 @@ void MJPEGServer::sendStream(int fd, const char *parameter)
       ROS_DEBUG("waiting for new frame");
       image_buffer->condition_.wait(lock);
       ROS_DEBUG("got new frame, send it to clients");
+      sendFrame(fd, image_buffer, parameter_map, frame, buffer)
       if (!sendFrame(fd, image_buffer, parameter_map, frame, buffer))
       	break;
   	}
